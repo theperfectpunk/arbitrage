@@ -45,7 +45,7 @@ export class ArbitrageService {
         !isNaN(transformedData[crypto].USDT) &&
         !isNaN(transformedData[crypto].INR)
       ) {
-        acc[crypto].Diff = (1 - (transformedData[crypto].INR/(transformedData[crypto].USDT*exchangeRate)))*100;
+        acc[crypto].Diff = ((1 - (transformedData[crypto].INR/(transformedData[crypto].USDT*exchangeRate)))*100).toPrecision(4);
       }
       return acc;
     }, transformedData)
@@ -78,7 +78,7 @@ export class ArbitrageService {
 export type ArbitrageDataType = {
   USDT?: number
   INR?: number
-  Diff?: number
+  Diff?: string
 }
 // export type ArbitrageDataType = {
 //   [x in keyof typeof CURRENCY_PAIRS]: {[crypto: string]: number}
