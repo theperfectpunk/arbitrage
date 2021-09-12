@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  script.
+    setTimeout(() => { window.location.reload() }, #{interval})
+  h1 1 USDT = #{exchangeRate} INR
+  p.lead Arbitrage opportunities Binance & WazirX
+  hr
+  each currency in crypto
+    .row
+      .col-sm-4
+        p #{currency}/USDT
+        h2 #{arbitrage[currency].USDT}
+        
+      .col-sm-4
+        p Diff
+        h2 #{arbitrage[currency].Diff}
+
+      .col-sm-4
+        p #{currency}/INR
+        h2 #{arbitrage[currency].INR}
