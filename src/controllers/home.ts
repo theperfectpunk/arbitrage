@@ -12,7 +12,6 @@ export const index = (req: Request, res: Response) => {
     ArbitrageService.getArbitrage(exchangeRate).then(arbitrage => {
         res.render("home", {
             title: "Home",
-            crypto: CRYPTO,
             arbitrage,
             exchangeRate,
             interval,

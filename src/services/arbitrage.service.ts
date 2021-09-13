@@ -52,6 +52,17 @@ export class ArbitrageService {
     return diffInjectedData
   }
 
+  private static toArray (data: {[x: string]: ArbitrageDataType}): ArbitrageArrayType[] {
+    let arbitrageArray: ArbitrageArrayType[] = [];
+    Object.entries(data).forEach(([key, value]) => {
+      arbitrageArray.push({...value, CURR: key})
+    })
+    arbitrageArray.sort((a, b) => {
+      return parseFloat(a.Diff) - parseFloat(b.Diff);
+    })
+    return arbitrageArray;
+  } 
+
   static getArbitrage (exchangeRate: number) {
     if (!ArbitrageService.arbitrageData || this.isArbitrageUpdateRequired()) {
       return new Promise((resolve) => {
@@ -59,14 +70,14 @@ export class ArbitrageService {
           ([wazirxPriceList, binancePriceList]) => {
             const transformedData = ArbitrageService.transformData(binancePriceList, wazirxPriceList)
             ArbitrageService.arbitrageData = transformedData;
-            resolve(ArbitrageService.injectDiff(transformedData, exchangeRate));
+            resolve(ArbitrageService.toArray(ArbitrageService.injectDiff(transformedData, exchangeRate)));
           }
         )
       })
     } else {
       return new Promise((resolve) => {
         if (ArbitrageService.arbitrageData) {
-          resolve(ArbitrageService.injectDiff(ArbitrageService.arbitrageData, exchangeRate));
+          resolve(ArbitrageService.toArray(ArbitrageService.injectDiff(ArbitrageService.arbitrageData, exchangeRate)));
         } else {
           resolve({});
         }
@@ -79,6 +90,10 @@ export type ArbitrageDataType = {
   USDT?: number
   INR?: number
   Diff?: string
+}
+
+export interface ArbitrageArrayType extends ArbitrageDataType {
+  CURR: string
 }
 // export type ArbitrageDataType = {
 //   [x in keyof typeof CURRENCY_PAIRS]: {[crypto: string]: number}
