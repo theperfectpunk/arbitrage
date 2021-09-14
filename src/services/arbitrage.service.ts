@@ -28,7 +28,7 @@ export class ArbitrageService {
       }
       const cryptoKey = `${crypto}${CURRENCY_PAIRS.INR}`.toLowerCase();
       if (wazirxPriceList[cryptoKey]) {
-        const cryptoPrice = parseFloat(wazirxPriceList[cryptoKey].last);
+        const cryptoPrice = parseFloat(wazirxPriceList[cryptoKey].sell);
         if (!isNaN(cryptoPrice)) {
           acc[crypto] = { ...acc[crypto], [CURRENCY_PAIRS.INR]: cryptoPrice };
         }
