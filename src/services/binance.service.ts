@@ -20,7 +20,7 @@ export class BinanceService {
         BinanceService._getPrice().then(
           (response: AxiosResponse<BinancePairInfoType[]>) => {
             BinanceService.binancePriceRequestTimestamp = Date.now();
-            BinanceService.binancePriceResponse = response.data
+            BinanceService.binancePriceResponse = response.data;
             resolve(response.data);
           },
           (error: any) => {

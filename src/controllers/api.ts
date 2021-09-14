@@ -17,12 +17,12 @@ export const getApi = (req: Request, res: Response) => {
 };
 
 export const getArbitrage = (req: Request, res: Response) => {
-    const exchangeRate = typeof req.query.rate === 'string' ? parseFloat(req.query.rate) : DEFAULT_EXCHANGE_RATE;
+    const exchangeRate = typeof req.query.rate === "string" ? parseFloat(req.query.rate) : DEFAULT_EXCHANGE_RATE;
     ArbitrageService.getArbitrage(exchangeRate).then(arbitrage => {
         res.statusCode = 200;
-        res.json({ arbitrage })
-    })
-}
+        res.json({ arbitrage });
+    });
+};
 
 export const getWazirX = (req: Request, res: Response) => {
     WazirxService.getPrice().then(priceList => {

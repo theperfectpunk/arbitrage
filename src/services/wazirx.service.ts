@@ -20,7 +20,7 @@ export class WazirxService {
         WazirxService._getPrice().then(
           (response: AxiosResponse<WazirxGetPriceResponseType>) => {
             WazirxService.wazirxPriceRequestTimestamp = Date.now();
-            WazirxService.wazirxPriceResponse = response.data
+            WazirxService.wazirxPriceResponse = response.data;
             resolve(response.data);
           },
           (error: any) => {

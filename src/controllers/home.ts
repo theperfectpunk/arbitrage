@@ -8,7 +8,7 @@ import { ArbitrageService } from "../services/arbitrage.service";
  */
 export const index = (req: Request, res: Response) => {
     const interval = API_INTERVAL+1000;
-    const exchangeRate = typeof req.query.rate === 'string' ? parseFloat(req.query.rate) : DEFAULT_EXCHANGE_RATE;
+    const exchangeRate = typeof req.query.rate === "string" ? parseFloat(req.query.rate) : DEFAULT_EXCHANGE_RATE;
     ArbitrageService.getArbitrage(exchangeRate).then(arbitrage => {
         res.render("home", {
             title: "Home",
@@ -16,5 +16,5 @@ export const index = (req: Request, res: Response) => {
             exchangeRate,
             interval,
         });
-    })
+    });
 };
