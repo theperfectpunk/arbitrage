@@ -6,17 +6,16 @@ block content
     setTimeout(() => { window.location.reload() }, #{interval})
   h1 1 USDT = #{exchangeRate} INR
   p.lead Arbitrage opportunities Binance & WazirX
-  hr
-  each currency in crypto
-    .row
+  each pair in arbitrage
+    .row.border-top.pt-2
       .col-sm-4
-        p #{currency}/USDT
-        h2 #{arbitrage[currency].USDT}
+        p #{pair.CURR}/USDT
+        h2 #{pair.USDT}
         
       .col-sm-4
         p Diff
-        h2 #{arbitrage[currency].Diff}
+        h2 #{pair.Diff}
 
       .col-sm-4
-        p #{currency}/INR
-        h2 #{arbitrage[currency].INR}
+        p #{pair.CURR}/INR
+        h2 #{pair.INR}
